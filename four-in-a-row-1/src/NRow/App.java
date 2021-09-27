@@ -4,6 +4,7 @@ import NRow.Heuristics.SimpleHeuristic;
 import NRow.Players.HumanPlayer;
 import NRow.Players.PlayerController;
 
+// INITIAL COMMIT 
 public class App {
     public static void main(String[] args) throws Exception {
         int gameN = 4;

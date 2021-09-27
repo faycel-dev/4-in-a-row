@@ -2,6 +2,7 @@ package NRow.Players;
 
 import NRow.Board;
 import NRow.Heuristics.Heuristic;
+import NRow.Node;
 
 public class MinMaxPlayer extends PlayerController {
     private int depth;
@@ -22,6 +23,24 @@ public class MinMaxPlayer extends PlayerController {
         // TODO: implement minmax player!
         // HINT: use the functions on the 'board' object to produce a new board given a specific move
         // HINT: use the functions on the 'heuristic' object to produce evaluations for the different board states!
+
+        Node node = new Node(playerId, board);
+        while (depth < 3){
+            node.addChild(node);
+        }
+
+        // FROM NOW ON WE WILL HAVE TO CREATE THE MIN-MAX ALGORITHM
+  
+        // for each node calculate the heuristic
+        // call the function evaluate in SimpleHeuristic
+        // assign that value to the node of the last level
+        // have to start filling in the tree, but keep in mind alpha beta pruning -> plan how to do that!
+
+        // create a function that checks the depth. if not max depth -> keep calling itself, otherwise the evaluate function from heuristic
+        // return the max of children
+        // keep track of what action that leads to that node
+        // inside the node class, variable action, the i of getNewBoard
+        // need to know playerId - min/max player
         
         // Example: 
         int maxValue = Integer.MIN_VALUE;
