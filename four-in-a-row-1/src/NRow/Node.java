@@ -1,31 +1,34 @@
 package NRow;
-import java.util.*;  
 
-import NRow.Board;
-import NRow.Players.*;
+public abstract class Node extends TreeNode{
 
-public class Node {
-
-    protected LinkedList<Node> children;
-    private int playerId;
-    private Board boardstate;
-    private Node parent;
-
+    protected TreeNode[] children;
+    protected int opponentID;
     //constructor
-    public Node(int playerId, Board boardstate){
-        this.playerId = playerId;
-        this.boardstate = boardstate;
-        children = new LinkedList<Node>();
+    public Node(int playerId, int opponent,Board board){
+        playerID = playerId;
+        currentState = board;
+        opponentID=opponent;
+        children = new TreeNode[board.width];
+    }
 
+
+//    public TreeNode[] children(){
+//        for (int i = 0; i < currentState.width; i++) {
+//            Board state = currentState.getNewBoard(i, playerID);
+////            if (isLeaf(state)) {
+////                children.add(new LeafNode(playerID, state));
+////            } else {
+////                //children[i] = new MinNode(playerID, opponentID, state);
+////            }
+//        }
+//    }
+
+    protected  boolean isLeaf(Board state){
+        return false;
     }
-    public Node(int playerId, Board boardstate, Node parent){
-        this.playerId = playerId;
-        this.boardstate = boardstate;
-        this.parent = parent;
-        children = new LinkedList<Node>();
-    }
-  
-    public void addChild(Node n){
-        children.add(n);
-    }
+
+    protected abstract TreeNode[] getChildren();
+    protected abstract TreeNode getNextMaxNode(Board board);
+
 }

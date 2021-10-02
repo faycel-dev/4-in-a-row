@@ -3,13 +3,14 @@ package NRow.Players;
 import NRow.Board;
 import NRow.Heuristics.Heuristic;
 import NRow.Node;
+import NRow.Tree;
 
 public class MinMaxPlayer extends PlayerController {
-    private int depth;
-
-    public MinMaxPlayer(int playerId, int gameN, int depth, Heuristic heuristic) {
+    private final int depth=5;
+    protected Tree tree;
+    public MinMaxPlayer(int playerId, int gameN, int depth, Heuristic heuristic,int width,int hight ) {
         super(playerId, gameN, heuristic);
-        this.depth = depth;
+        tree=new Tree(playerId,width,hight);
         //You can add functionality which runs when the player is first created (before the game starts)
     }
 
@@ -24,10 +25,6 @@ public class MinMaxPlayer extends PlayerController {
         // HINT: use the functions on the 'board' object to produce a new board given a specific move
         // HINT: use the functions on the 'heuristic' object to produce evaluations for the different board states!
 
-        Node node = new Node(playerId, board);
-        while (depth < 3){
-            node.addChild(node);
-        }
 
         // FROM NOW ON WE WILL HAVE TO CREATE THE MIN-MAX ALGORITHM
   
@@ -41,7 +38,8 @@ public class MinMaxPlayer extends PlayerController {
         // keep track of what action that leads to that node
         // inside the node class, variable action, the i of getNewBoard
         // need to know playerId - min/max player
-        
+        tree.updatecurentState(board);
+        tree.getCurrentNode().updateValue(heuristic, depth);
         // Example: 
         int maxValue = Integer.MIN_VALUE;
         int maxMove = 0;
@@ -55,7 +53,7 @@ public class MinMaxPlayer extends PlayerController {
             }
         }
         // This returns the same as:
-        heuristic.getBestAction(playerId, board); // Very useful helper function!
+      //  heuristic.getBestAction(playerId, board); // Very useful helper function!
         
 
         /*
