@@ -1,5 +1,7 @@
 package NRow;
 
+import NRow.Heuristics.Heuristic;
+import NRow.Heuristics.SimpleHeuristic;
 import NRow.Players.PlayerController;
 
 public class Game {
@@ -20,23 +22,23 @@ public class Game {
     this.gameN = gameN;
     this.players = players;
     this.gameBoard = new Board(boardWidth, boardHeight);
-    this.tree=new Tree(1,7,6);
+
 
   }
-
   /**
    * Starts the game
    * @return the playerId of the winner
    */
   public int startGame() {
-    System.out.println("Start game!");
-    int currentPlayer = 0;
 
+    int currentPlayer = 0;
+    Heuristic h;
     while (!this.isOver()) {
       // turn player can make a move
-      gameBoard.play(players[currentPlayer].makeMove(gameBoard), players[currentPlayer].playerId);
-
+      // System.out.println("we started now");
+       gameBoard.play(players[currentPlayer].makeMove(gameBoard), players[currentPlayer].playerId);
       // other player can make a move now
+
       currentPlayer = (currentPlayer == 0) ? 1 : 0;
     }
 

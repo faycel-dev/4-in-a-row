@@ -6,11 +6,11 @@ import NRow.Node;
 import NRow.Tree;
 
 public class MinMaxPlayer extends PlayerController {
-    private final int depth=5;
-    protected Tree tree;
-    public MinMaxPlayer(int playerId, int gameN, int depth, Heuristic heuristic,int width,int hight ) {
+    private final int depth;
+
+    public MinMaxPlayer(int playerId, int gameN, int depth, Heuristic heuristic ) {
         super(playerId, gameN, heuristic);
-        tree=new Tree(playerId,width,hight);
+        this.depth=depth;
         //You can add functionality which runs when the player is first created (before the game starts)
     }
 
@@ -38,17 +38,19 @@ public class MinMaxPlayer extends PlayerController {
         // keep track of what action that leads to that node
         // inside the node class, variable action, the i of getNewBoard
         // need to know playerId - min/max player
-        tree.updatecurentState(board);
-        tree.getCurrentNode().updateValue(heuristic, depth);
+
         // Example: 
         int maxValue = Integer.MIN_VALUE;
         int maxMove = 0;
         for(int i = 0; i < board.width; i++) { //for each of the possible moves
             if(board.isValid(i)) { //if the move is valid
                 Board newBoard = board.getNewBoard(i, playerId); // Get a new board resulting from that move
-                int value = heuristic.evaluateBoard(playerId, newBoard); //evaluate that new board to get a heuristic value from it
+               Tree tree=new Tree( playerId,gameN,depth, heuristic,newBoard);
+                int value =minMax(tree); //evaluate that new board to get a heuristic value from it
                 if(value > maxValue) {
+                    maxValue = value;
                     maxMove = i;
+
                 }
             }
         }
@@ -64,5 +66,34 @@ public class MinMaxPlayer extends PlayerController {
 
         return maxMove;
     }
-    
+
+    private int minMax(Tree tree) {
+        return minMax(tree.root);
+    }
+
+    private int minMax(Node node) {
+        if(node.children.isEmpty()){ //is Leaf
+            return node.value;
+        }else{
+            if(node.player ==1){
+                int maxValue = Integer.MIN_VALUE;
+                for(Node child:node.children){
+                    int value=minMax(child);
+                    maxValue=Math.max(maxValue,value);
+                   // System.out.println(child.value );
+
+                }
+                return maxValue;
+            }else{
+                int minValue=Integer.MAX_VALUE;
+                for(Node child:node.children){
+                    int value=minMax(child);
+                    minValue=Math.min(minValue,value);
+
+                }
+                return minValue;
+            }
+        }
+    }
+
 }
