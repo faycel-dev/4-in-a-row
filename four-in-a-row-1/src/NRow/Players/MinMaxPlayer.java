@@ -44,7 +44,7 @@ public class MinMaxPlayer extends PlayerController {
         int maxMove = 0;
         for(int i = 0; i < board.width; i++) { //for each of the possible moves
             if(board.isValid(i)) { //if the move is valid
-                Board newBoard = board.getNewBoard(i, playerId); // Get a new board resulting from that move
+            Board newBoard = board.getNewBoard(i, playerId); // Get a new board resulting from that move
                Tree tree=new Tree( playerId,gameN,depth, heuristic,newBoard);
                 int value =minMax(tree); //evaluate that new board to get a heuristic value from it
                 if(value > maxValue) {
