@@ -10,7 +10,7 @@ public  class Node {
     public int value;
     public int alpha;
     public int beta ;
-    Node(Board board, int player, int value) {
+    Node(Board board, int player) {
         this.board = board;
         this.player = player;
         this.value = value;
@@ -23,5 +23,16 @@ public  class Node {
         children = new ArrayList<>();
     }
 
-
+    public Board getBoard() {
+        return board;
+      }
+    public int getValue() {
+        return value;
+      }
+      public void setValue(int i){
+        this.value = i;
+    }
+      public Node getChild(int i){
+          return this.children.get(i);
+      }
 }

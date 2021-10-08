@@ -22,7 +22,8 @@ public class Game {
     this.gameN = gameN;
     this.players = players;
     this.gameBoard = new Board(boardWidth, boardHeight);
-
+    // TODO: Initialize tree
+    //this.tree = new Tree(playerId, gameN, depth, heuristic, board);
 
   }
   /**
