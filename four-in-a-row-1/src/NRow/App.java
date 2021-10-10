@@ -35,7 +35,7 @@ public class App {
         MinMaxPlayer  minmax1= new MinMaxPlayer (2,4, 5, heuristic1);
            MinMaxPlayer  minmax2 = new MinMaxPlayer (1,4, 5, heuristic1);
 
-        PlayerController[] players = { minmax2,human2};
+        PlayerController[] players = { minmax2,human2}; //decide what kind of player it is
 
         return players;
     }
