@@ -9,7 +9,6 @@ public class Game {
   private PlayerController[] players;
   private Board gameBoard;
   private int winner;
-  Tree tree;
   /**
    * Create a new game
    * @param gameN N in a row required to win
