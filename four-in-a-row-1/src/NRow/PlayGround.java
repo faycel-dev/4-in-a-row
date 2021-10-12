@@ -1,4 +1,4 @@
-package NRow;
+/* package NRow;
 import NRow.Heuristics.*;
 
 import java.util.ArrayList;
@@ -106,9 +106,10 @@ public class PlayGround {
             }
         } */
 
-        return bestMove;
+/*         return bestMove;
         }  
 
     }
 
 
+ */ 
