@@ -28,14 +28,14 @@ public class App {
         //SimpleHeuristic heuristic2 = new SimpleHeuristic(n);
 
        //PlayerController human = new HumanPlayer(1, n, heuristic1);
-        PlayerController human2 = new HumanPlayer(2,n, heuristic1);
+       // PlayerController human2 = new HumanPlayer(2,n, heuristic1);
 
 
         //TODO: Implement other PlayerControllers (MinMax, AlphaBeta)
-       //MinMaxPlayer  minmax1= new MinMaxPlayer (2,n, 5, heuristic1);
-           MinMaxPlayer  minmax2 = new MinMaxPlayer (1, n, 5, heuristic1);
+        MinMaxPlayer  minmax1= new MinMaxPlayer (2,n, 5, heuristic1);
+        MinMaxPlayer  minmax2 = new MinMaxPlayer (1, n, 5, heuristic1);
 
-        PlayerController[] players = { minmax2, human2}; //decide what kind of player it is
+        PlayerController[] players = { minmax2, minmax1}; //decide what kind of player it is
 
         return players;
     }
