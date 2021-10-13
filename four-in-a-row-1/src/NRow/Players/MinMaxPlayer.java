@@ -56,16 +56,20 @@ public class MinMaxPlayer extends PlayerController {
                     Node child = new Node(node.getBoard().getNewBoard(i, nextPlayer),node); //create a child with the node as parent
                     getBestMinMaxAction(child); //call the function recursively to add children or set heuristic
                     if(child.getValue()<bestVal && nextPlayer != playerId){ //maximize 
-                        bestVal = child.getValue();
+                        //bestVal = child.getValue();
+                        bestVal = Math.min(child.getValue(),bestVal);
                         bestMove = i;
+                        node.setValue(bestVal);
                     }
                     else if (child.getValue()>bestVal && nextPlayer == playerId){ //minimize
-                        bestVal = child.getValue();
+                        //bestVal = child.getValue();
+                        bestVal = Math.max(child.getValue(),bestVal);
                         bestMove = i;
+                        node.setValue(bestVal);
                     }
                 }
             }
-            node.setValue(bestVal);
+       
         }
         return bestMove;
     }
@@ -94,15 +98,17 @@ public class MinMaxPlayer extends PlayerController {
                     
                     if(child.getValue()<bestVal && nextPlayer != playerId){ //maximize 
                         bestVal = child.getValue();
+                        node.setValue(bestVal);
                         bestMove = i;
                         alpha = Math.max(alpha, bestVal);
                         // Alpha Beta Pruning
-                        if (beta <= alpha)
+                        if (alpha <= beta)
                             break;
                         
                     }
                     else if (child.getValue()>bestVal && nextPlayer == playerId){ //minimize
                         bestVal = child.getValue();
+                        node.setValue(bestVal);
                         bestMove = i;
                         beta = Math.min(beta, bestVal);
                          // Alpha Beta Pruning
@@ -111,7 +117,7 @@ public class MinMaxPlayer extends PlayerController {
                     }
                 }
             }
-            node.setValue(bestVal);
+            
         }
         return bestMove;
     }
