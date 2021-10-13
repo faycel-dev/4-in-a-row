@@ -20,7 +20,7 @@ public class MinMaxPlayer extends PlayerController {
     public int makeMove(Board board) {
         Node root = new Node(board);
         // Decide if you want to do MiniMax or Alpha-Beta pruning by commenting/uncommenting the following two lines
-        //int bestMove = getBestAlphaBetaPruningAction(root); 
+        //int bestMove = getBestAlphaBetaPruningAction(root);
         int bestMove = getBestMinMaxAction(root);
         if (!board.isValid(bestMove)) { //Check for invalid moves, which may happen if the game is unwinnable
             for (int i = 0; i < board.width; i++) {
@@ -53,23 +53,22 @@ public class MinMaxPlayer extends PlayerController {
                     Node child = new Node(node.getBoard().getNewBoard(i, nextPlayer), node); //create a child with the node as parent
                     getBestMinMaxAction(child); //call the function recursively to add children or set heuristic
                     if (child.getValue() < bestVal && nextPlayer != playerId) { //maximize 
-                        //bestVal = child.getValue();
+                        bestVal = child.getValue();
                         bestVal = Math.min(child.getValue(), bestVal);
                         bestMove = i;
-                        node.setValue(bestVal);
                     } else if (child.getValue() > bestVal && nextPlayer == playerId) { //minimize
-                        //bestVal = child.getValue();
+                        bestVal = child.getValue();
                         bestVal = Math.max(child.getValue(), bestVal);
                         bestMove = i;
-                        node.setValue(bestVal);
                     }
                 }
             }
+            node.setValue(bestVal);
         }
         return bestMove;
     }
 
-     /**
+    /**
      * 
      * @param node
      * @return the column integer the player should chose based on alpha beta pruning
@@ -95,17 +94,15 @@ public class MinMaxPlayer extends PlayerController {
                     Node child = new Node(node.getBoard().getNewBoard(i, nextPlayer), node); //create a child with the node as parent
                     getBestAlphaBetaPruningAction(child); //call the function recursively to add children or set heuristic
                     if (child.getValue() < bestVal && nextPlayer != playerId) { //maximize 
-                        bestVal = child.getValue();
-                        node.setValue(bestVal);
+                        bestVal = Math.min(child.getValue(), bestVal);
                         bestMove = i;
-                        alpha = Math.max(alpha, bestVal);
+                        alpha = Math.min(alpha, bestVal);
                         // Alpha Beta Pruning
                         if (alpha <= beta)
                             break;
 
                     } else if (child.getValue() > bestVal && nextPlayer == playerId) { //minimize
-                        bestVal = child.getValue();
-                        node.setValue(bestVal);
+                        bestVal = Math.max(child.getValue(), bestVal);
                         bestMove = i;
                         beta = Math.min(beta, bestVal);
                         // Alpha Beta Pruning
@@ -114,6 +111,7 @@ public class MinMaxPlayer extends PlayerController {
                     }
                 }
             }
+            node.setValue(bestVal);
         }
         return bestMove;
     }
