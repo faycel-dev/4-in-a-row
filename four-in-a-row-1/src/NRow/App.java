@@ -32,8 +32,8 @@ public class App {
 
 
         //TODO: Implement other PlayerControllers (MinMax, AlphaBeta)
-        MinMaxPlayer  minmax1= new MinMaxPlayer (2,n, 5, heuristic1);
-        MinMaxPlayer  minmax2 = new MinMaxPlayer (1, n, 5, heuristic1);
+        MinMaxPlayer  minmax1= new MinMaxPlayer (2,n, 7, heuristic1);
+        MinMaxPlayer  minmax2 = new MinMaxPlayer (1, n, 7, heuristic1);
 
         PlayerController[] players = { minmax2, minmax1}; //decide what kind of player it is
 
